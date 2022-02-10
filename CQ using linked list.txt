@@ -1,0 +1,18 @@
+void enqueue()
+{
+  n=(struct node*)malloc(sizeof(struct node));
+  printf("Enter data\n");
+  scanf("%d",&n->data);
+  n->next=NULL;
+
+  if(rear==NULL)
+  {
+      rear=n;
+      front=n;
+  }
+  else
+    {
+        rear->next=n;
+        rear=n;
+    }
+}

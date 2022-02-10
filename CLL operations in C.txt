@@ -1,0 +1,191 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+}*head=NULL,*last,*n,*temp,*prev;
+void create();
+void display();
+void displaykey();
+void insertbegin();
+void insertend();
+void insertafter();
+void insertbefore();
+void delbegin();
+void delend();
+void del();
+int ch,key;
+int main()
+{
+    printf("\n1.create\n2.display\n3.displaykey\n4.insertbegin\n5.insertend\n6.insertafter\n7.insertbefore\n8.delbegin\n9.delend\n10.del\n");
+    do
+    {
+        printf("Enter choice\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: create();break;
+            case 2: display();break;
+            case 3: displaykey();break;
+            case 4: insertbegin();break;
+            case 5: insertend();break;
+            case 6: insertafter();break;
+            case 7: insertbefore();break;
+            case 8: delbegin();break;
+            case 9: delend();break;
+            case 10: del();break;
+        }
+    }while(ch<=10);
+}
+void create()
+{
+    n=(struct node*)malloc(sizeof(struct node));
+    printf("Enter data\n");
+    scanf("%d",&n->data);
+    n->next=NULL;
+
+if(head==NULL)
+{
+    head=n;
+    last=n;
+}
+else
+{
+    last->next=n;
+    last=n;
+}
+last->next=head;
+}
+void display()
+{
+    temp=head;
+  do
+    {
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }while(temp!=head);
+}
+void displaykey()
+{
+    int key;
+    printf("Enter the element to start traversal\n");
+    scanf("%d",&key);
+    temp=head;
+    do
+    {
+        if(temp->data==key)
+            break;
+        else
+        {
+            temp=temp->next;
+        }
+    }while(temp!=head);
+    do
+    {
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }while(temp->data!=key);
+}
+void insertbegin()
+{
+    n=(struct node *)malloc(sizeof(struct node));
+    printf("Enter data\n");
+    scanf("%d",&n->data);
+    n->next=NULL;
+
+    n->next=head;
+    head=n;
+    last->next=head;
+}
+void insertend()
+{
+    n=(struct node *)malloc(sizeof(struct node));
+    printf("Enter data\n");
+    scanf("%d",&n->data);
+    n->next=NULL;
+
+    last->next=n;
+    last=n;
+    last->next=head;
+}
+void insertafter()
+{
+    n=(struct node *)malloc(sizeof(struct node));
+    printf("Enter data\n");
+    scanf("%d",&n->data);
+    n->next=NULL;
+
+    printf("Enter the key element after which you insert\n");
+    scanf("%d",&key);
+
+    temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->data==key)
+            break;
+        temp=temp->next;
+    }
+
+    n->next=temp->next;
+    temp->next=n;
+}
+void insertbefore()
+{
+    n=(struct node *)malloc(sizeof(struct node));
+    printf("Enter data\n");
+    scanf("%d",&n->data);
+    n->next=NULL;
+
+    printf("Enter the element before which you want to insert\n");
+    scanf("%d",&key);
+
+
+    temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->data==key)
+            break;
+        prev=temp;
+        temp=temp->next;
+    }
+    n->next=temp->prev;
+    prev->next=n;
+}
+void delbegin()
+{
+    temp=head;
+    head=head->next;
+    last->next=head;
+    free(temp);
+}
+void delend()
+{
+    temp=head;
+    while(temp!=last)
+    {
+        prev=temp;
+        temp=temp->next;
+    }
+    last=prev;
+    last->prev=head;
+}
+void del()
+{
+    printf("Enter the element to be deleted\n");
+    scanf("%d",&key);
+    temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->data==key)
+            break;
+        else
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+    }
+    prev->next=temp->next;
+}
+

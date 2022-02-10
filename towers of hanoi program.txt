@@ -1,0 +1,18 @@
+#include <stdio.h>
+int T_O_H(int n,char A,char C,char B)
+{
+    if(n==1)
+    {
+        printf("\nMove disk 1 from rod %c to rod %c",A,C);
+        return;
+    }
+    T_O_H(n-1,A,B,C);
+    printf("\nMove disk %d from rod %c to rod %c",n,A,B);
+    T_O_H(n-1,B,C,A);
+}
+int main()
+{
+    int n=3;
+    T_O_H(n,'A','C','B');
+    return 0;
+}

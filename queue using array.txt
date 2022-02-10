@@ -1,0 +1,45 @@
+#include <stdio.h>
+#define size 5
+int q[size],rear=-1,front=-1,x,ch;
+void enqueue();
+void dequeue();
+void display();
+int main()
+{
+    printf("1.Enqueue\n2.Dequeue\n3.Traversal\n");
+    do
+    {
+        printf("\nEnter choice\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:enqueue();break;
+            case 2:dequeue();break;
+            case 3:display();break;
+        }
+    }while(ch<=3);
+}
+void enqueue()
+{
+    printf("\nEnter data\n");
+    scanf("%d",&x);
+    rear++;
+    q[rear]=x;
+}
+void dequeue()
+{
+    if(front==rear)
+        printf("Queue Underflow:Is empty");
+    else{
+        front++;
+        x=q[front];
+        printf("%d is removed\n",x);
+    }
+}
+void display()
+{
+    for(int i=front+1;i<=rear;i++)
+    {
+        printf("%d ",q[i]);
+    }
+}
